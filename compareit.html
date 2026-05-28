@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CompareIt!</title>
+<style>
+body{background:linear-gradient(135deg,#0f1b2d,#1a2845);color:#f5f0e8;padding:60px 20px;font-family:system-ui,sans-serif;min-height:100vh}
+.container{max-width:900px;margin:0 auto}
+.header{text-align:center;margin-bottom:80px}
+.logo{font-size:48px;font-weight:900;background:linear-gradient(135deg,#e8a838,#2ab8a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:24px}
+h1{font-size:56px;font-weight:700;margin:16px 0}
+.tagline{font-size:18px;color:#6b7a8d;max-width:500px;margin:0 auto}
+.banner{background:linear-gradient(135deg,rgba(232,168,56,0.15),rgba(42,184,160,0.1));border:1px solid rgba(232,168,56,0.3);border-radius:12px;padding:20px;margin-bottom:40px;text-align:center}
+.counter{font-size:36px;font-weight:900;color:#e8a838;margin:8px 0}
+.progress{width:100%;height:4px;background:rgba(232,168,56,0.2);border-radius:2px;margin-top:12px;overflow:hidden}
+.bar{height:100%;background:linear-gradient(90deg,#e8a838,#2ab8a0);width:100%;transition:width 0.6s}
+.form-box{background:rgba(26,40,69,0.6);border:1px solid rgba(232,168,56,0.2);border-radius:12px;padding:40px;max-width:500px;margin:0 auto 40px}
+input{width:100%;padding:14px 16px;border:1px solid rgba(232,168,56,0.3);border-radius:8px;background:rgba(245,240,232,0.08);color:#f5f0e8;font-size:16px;box-sizing:border-box;margin-top:8px}
+button{width:100%;padding:14px 24px;border:none;border-radius:8px;font-size:16px;font-weight:600;cursor:pointer;background:linear-gradient(135deg,#e8a838,#f5c96c);color:#0f1b2d;text-transform:uppercase;letter-spacing:1px;margin-top:20px}
+button:hover{opacity:0.9}
+button:disabled{opacity:0.6;cursor:not-allowed}
+#confirm{display:none;text-align:center}
+.checkmark{width:80px;height:80px;margin:0 auto 32px;background:linear-gradient(135deg,#2ab8a0,#e8a838);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px}
+.confirm-title{font-size:36px;font-weight:900;margin-bottom:16px}
+.confirm-msg{font-size:18px;color:#6b7a8d;margin-bottom:32px;max-width:400px;margin-left:auto;margin-right:auto}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+<div class="logo">CompareIt!</div>
+<h1>Side-by-Side Research, Made Easy</h1>
+<p class="tagline">Compare anything. See everything at a glance.</p>
+</div>
+<div class="banner">
+<div style="font-size:14px;color:#6b7a8d;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">First 50 Users Get Free Access</div>
+<div class="counter"><span id="spots">50</span> spots left</div>
+<div style="font-size:14px;color:#6b7a8d">After launch special ends: <strong>$9.99/month</strong></div>
+<div class="progress"><div id="bar" class="bar"></div></div>
+</div>
+<div id="form" class="form-box">
+<label style="display:block;font-size:14px;font-weight:600;color:#f5f0e8;text-transform:uppercase">Email Address</label>
+<input id="email" type="email" placeholder="you@example.com">
+<button id="btn" onclick="submit()">Get Free Access</button>
+</div>
+<div id="confirm">
+<div class="checkmark">✓</div>
+<h2 class="confirm-title">You're In!</h2>
+<p class="confirm-msg">Check your email for next steps and your access link.</p>
+<p style="font-size:14px;color:#6b7a8d">Welcome to CompareIt! 🎉</p>
+</div>
+</div>
+<script>
+let used=0;
+function submit(){
+const email=document.getElementById('email').value;
+if(!email){alert('Enter email');return}
+document.getElementById('btn').disabled=true;
+document.getElementById('btn').textContent='Processing...';
+setTimeout(()=>{
+used++;
+document.getElementById('spots').textContent=Math.max(50-used,0);
+document.getElementById('bar').style.width=(used/50*100)+'%';
+const ctx=new (window.AudioContext||window.webkitAudioContext)();
+const now=ctx.currentTime;
+[659,784].forEach((f,i)=>{const o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=f;g.gain.setValueAtTime(0.3,now);g.gain.exponentialRampToValueAtTime(0.01,now+0.3);o.start(now+i*0.1);o.stop(now+i*0.1+0.3)});
+document.getElementById('form').style.display='none';
+document.getElementById('confirm').style.display='block';
+},500);
+}
+</script>
+</body>
+</html>
