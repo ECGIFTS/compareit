@@ -39,11 +39,13 @@ button:disabled{opacity:0.6;cursor:not-allowed}
 <div style="font-size:14px;color:#6b7a8d">After launch special ends: <strong>$9.99/month</strong></div>
 <div class="progress"><div id="bar" class="bar"></div></div>
 </div>
-<div id="form" class="form-box">
-<label style="display:block;font-size:14px;font-weight:600;color:#f5f0e8;text-transform:uppercase">Email Address</label>
-<input id="email" type="email" placeholder="you@example.com">
-<button id="btn" onclick="submit()">Get Free Access</button>
-</div>
+<form id="form" class="form-box" action="https://formspree.io/f/xljrawpl" method="POST">
+<label style="display:block;font-size:14px;font-weight:600;color:#f5f0e8;text-transform:uppercase">
+Email Address
+</label>
+<input type="email" name="email" placeholder="you@example.com" required>
+<button type="submit">Get Free Access</button>
+</form>
 <div id="confirm">
 <div class="checkmark">✓</div>
 <h2 class="confirm-title">You're In!</h2>
