@@ -261,7 +261,11 @@ button:disabled{
 </div>
 
 <script>
-
+function recordFeedback(answer) {
+  alert(answer === 'yes'
+    ? 'Thanks for the thumbs up!'
+    : 'Thanks for your feedback!');
+}
 let used = 0;
 
 document.getElementById('form').addEventListener('submit', function(e){
