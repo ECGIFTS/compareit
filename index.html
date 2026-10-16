@@ -262,9 +262,24 @@ button:disabled{
 
 <script>
 function recordFeedback(answer) {
-  alert(answer === 'yes'
-    ? 'Thanks for the thumbs up!'
-    : 'Thanks for your feedback!');
+  fetch('https://formspree.io/f/xljrawpl', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      feedback: answer
+    })
+  })
+  .then(() => {
+    alert(answer === 'yes'
+      ? 'Thanks for the thumbs up!'
+      : 'Thanks for your feedback!');
+  })
+  .catch(() => {
+    alert('Thanks for your feedback!');
+  }); 
 }
 let used = 0;
 
